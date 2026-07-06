@@ -11,9 +11,9 @@ its own.
 
 PROVENANCE
 
-All 42 .gir files (14 files in each of the linux/, macos/, and windows/
-folders) were copied one time, byte-for-byte without modification, on
-2026-07-05 from:
+All .gir files (31 in linux/, 25 in macos/, 26 in windows/ — the complete
+set shipped by the upstream snapshot) and the three gir_files*.txt manifest
+files were copied without modification, on 2026-07-05, from:
 
     Repository: https://github.com/gircore/gir-files
     Commit:     fa9a30ef0bedb8b8b96e87421713e6ba4698a466
@@ -26,54 +26,73 @@ built on each of the three platforms; its maintainers publish it under the
 GNU Lesser General Public License, Version 2.1 — the same license reproduced
 in this repository's LICENSE file.
 
-The 14 files kept here are the subset needed to generate C# bindings for
-GTK 4: Gtk-4.0.gir plus the transitive <include> closure of its
-introspection data.
-
 ================================================================================
 
 PER-LIBRARY LICENSE INFORMATION
 
 A .gir file is API metadata extracted from a library's annotated C sources,
-and carries the license of the library it describes. The source package and
-version below are as recorded by the gir-files manifest (gir_files.txt) at
-the pinned commit.
+and carries the license of the library it describes. The gir_files*.txt
+manifests record the source package and version of every file at this
+snapshot. License identification by described library:
 
-  .gir file(s)                      Described library (version)    License
-  --------------------------------  -----------------------------  ----------------------
-  GLib-2.0, GModule-2.0,            GLib (glib 2.89.0)             LGPL-2.1-or-later
+  .gir file(s)                      Described library                License
+  --------------------------------  -------------------------------  ----------------------
+  GLib-2.0, GModule-2.0,            GLib (glib 2.89.0)               LGPL-2.1-or-later
   GObject-2.0, Gio-2.0                https://gitlab.gnome.org/GNOME/glib
 
-  Gtk-4.0, Gdk-4.0, Gsk-4.0         GTK (gtk4 4.23.0)              LGPL-2.1-or-later
-                                      https://gitlab.gnome.org/GNOME/gtk
+  Gtk-4.0, Gdk-4.0, Gsk-4.0,        GTK (gtk4 4.23.0)                LGPL-2.1-or-later
+  GdkX11-4.0, GdkWayland-4.0,         https://gitlab.gnome.org/GNOME/gtk
+  GdkWin32-4.0
 
-  GdkPixbuf-2.0                     gdk-pixbuf (2.45.0)            LGPL-2.1-or-later
+  GtkSource-5                       GtkSourceView (5.21.0)           LGPL-2.1-or-later
+                                      https://gitlab.gnome.org/GNOME/gtksourceview
+
+  GdkPixbuf-2.0                     gdk-pixbuf (2.45.0)              LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/gdk-pixbuf
 
-  Pango-1.0, PangoCairo-1.0         Pango (pango 1.58.0)           LGPL-2.1-or-later
+  Pango-1.0, PangoCairo-1.0         Pango (pango 1.58.0)             LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/pango
 
-  Graphene-1.0                      Graphene (1.11.0)              MIT
+  Adw-1                             libadwaita (1.10.0)              LGPL-2.1-or-later
+                                      https://gitlab.gnome.org/GNOME/libadwaita
+
+  Gst-1.0, GstApp-1.0,              GStreamer (1.27.0)               LGPL-2.1-or-later
+  GstAudio-1.0, GstBase-1.0,          https://gitlab.freedesktop.org/gstreamer
+  GstPbutils-1.0, GstVideo-1.0
+
+  Rsvg-2.0                          librsvg (2.63.0)                 LGPL-2.1-or-later
+                                      https://gitlab.gnome.org/GNOME/librsvg
+
+  Secret-1                          libsecret (0.22.0)               LGPL-2.1-or-later
+                                      https://gitlab.gnome.org/GNOME/libsecret
+
+  Soup-3.0                          libsoup (3.7.0)                  LGPL-2.1-or-later
+                                      https://gitlab.gnome.org/GNOME/libsoup
+
+  WebKit-6.0, JavaScriptCore-6.0,   WebKitGTK (2.53.0)               LGPL-2.1 and
+  WebKitWebProcessExtension-6.0       https://webkitgtk.org            BSD-2-Clause (mixed)
+
+  Graphene-1.0                      Graphene (1.11.0)                MIT
                                       https://github.com/ebassi/graphene
 
-  HarfBuzz-0.0                      HarfBuzz (12.0.0)              MIT-style ("Old MIT")
+  HarfBuzz-0.0                      HarfBuzz (12.0.0)                MIT-style ("Old MIT")
                                       https://github.com/harfbuzz/harfbuzz
 
-  cairo-1.0                         cairo / cairo-gobject (1.19.0) LGPL-2.1 or MPL-1.1
-                                      https://www.cairographics.org  (dual-licensed)
+  cairo-1.0                         cairo / cairo-gobject (1.19.0)   LGPL-2.1 or MPL-1.1
+                                      https://www.cairographics.org    (dual-licensed)
 
-  freetype2-2.0                     FreeType 2 type stubs          (see note below)
-                                      https://freetype.org
+  freetype2-2.0, xlib-2.0           Hand-maintained type stubs       (see note below)
 
 Notes:
 
-  * cairo-1.0.gir and freetype2-2.0.gir are small, hand-maintained stub
-    files that originate from the GNOME gobject-introspection project
-    (https://gitlab.gnome.org/GNOME/gobject-introspection, LGPL-2.0-or-later
-    for its data files), rather than being scanned out of the cairo or
-    FreeType builds. freetype2-2.0.gir declares a handful of opaque types
-    and contains no FreeType source material; FreeType itself is
-    dual-licensed FTL / GPL-2.0.
+  * cairo-1.0.gir, freetype2-2.0.gir, and xlib-2.0.gir are small,
+    hand-maintained stub files that originate from the GNOME
+    gobject-introspection project
+    (https://gitlab.gnome.org/GNOME/gobject-introspection,
+    LGPL-2.0-or-later for its data files), rather than being scanned out
+    of the cairo, FreeType, or Xlib builds. freetype2-2.0.gir declares a
+    handful of opaque types and contains no FreeType source material;
+    FreeType itself is dual-licensed FTL / GPL-2.0.
 
   * The full license text for each library is available in that library's
     source repository (linked above). The upstream gir-files repository
