@@ -31,54 +31,55 @@ in this repository's LICENSE file.
 PER-LIBRARY LICENSE INFORMATION
 
 A .gir file is API metadata extracted from a library's annotated C sources,
-and carries the license of the library it describes. The gir_files*.txt
-manifests record the source package and version of every file at this
-snapshot. License identification by described library:
+and carries the license of the library it describes. The versions below are
+the ones embedded in the .gir files themselves (their MAJOR/MINOR/MICRO
+version constants), read from the linux/ folder; the notes cover the macos/
+and windows/ folders. License identification by described library:
 
   .gir file(s)                      Described library                License
   --------------------------------  -------------------------------  ----------------------
-  GLib-2.0, GModule-2.0,            GLib (glib 2.89.0)               LGPL-2.1-or-later
+  GLib-2.0, GModule-2.0,            GLib (glib 2.88.1)               LGPL-2.1-or-later
   GObject-2.0, Gio-2.0                https://gitlab.gnome.org/GNOME/glib
 
-  Gtk-4.0, Gdk-4.0, Gsk-4.0,        GTK (gtk4 4.23.0)                LGPL-2.1-or-later
+  Gtk-4.0, Gdk-4.0, Gsk-4.0,        GTK (gtk4 4.22.4)                LGPL-2.1-or-later
   GdkX11-4.0, GdkWayland-4.0,         https://gitlab.gnome.org/GNOME/gtk
   GdkWin32-4.0
 
-  GtkSource-5                       GtkSourceView (5.21.0)           LGPL-2.1-or-later
+  GtkSource-5                       GtkSourceView (5.20.0)           LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/gtksourceview
 
-  GdkPixbuf-2.0                     gdk-pixbuf (2.45.0)              LGPL-2.1-or-later
+  GdkPixbuf-2.0                     gdk-pixbuf (2.44.6)              LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/gdk-pixbuf
 
-  Pango-1.0, PangoCairo-1.0         Pango (pango 1.58.0)             LGPL-2.1-or-later
+  Pango-1.0, PangoCairo-1.0         Pango (pango 1.57.1)             LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/pango
 
-  Adw-1                             libadwaita (1.10.0)              LGPL-2.1-or-later
+  Adw-1                             libadwaita (1.9.1)               LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/libadwaita
 
-  Gst-1.0, GstApp-1.0,              GStreamer (1.27.0)               LGPL-2.1-or-later
+  Gst-1.0, GstApp-1.0,              GStreamer (1.26.11)              LGPL-2.1-or-later
   GstAudio-1.0, GstBase-1.0,          https://gitlab.freedesktop.org/gstreamer
   GstPbutils-1.0, GstVideo-1.0
 
-  Rsvg-2.0                          librsvg (2.63.0)                 LGPL-2.1-or-later
+  Rsvg-2.0                          librsvg (2.62.2)                 LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/librsvg
 
-  Secret-1                          libsecret (0.22.0)               LGPL-2.1-or-later
+  Secret-1                          libsecret (0.21.7)               LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/libsecret
 
-  Soup-3.0                          libsoup (3.7.0)                  LGPL-2.1-or-later
+  Soup-3.0                          libsoup (3.6.6)                  LGPL-2.1-or-later
                                       https://gitlab.gnome.org/GNOME/libsoup
 
-  WebKit-6.0, JavaScriptCore-6.0,   WebKitGTK (2.53.0)               LGPL-2.1 and
+  WebKit-6.0, JavaScriptCore-6.0,   WebKitGTK (2.52.4)               LGPL-2.1 and
   WebKitWebProcessExtension-6.0       https://webkitgtk.org            BSD-2-Clause (mixed)
 
-  Graphene-1.0                      Graphene (1.11.0)                MIT
+  Graphene-1.0                      Graphene (1.10.x)                MIT
                                       https://github.com/ebassi/graphene
 
-  HarfBuzz-0.0                      HarfBuzz (12.0.0)                MIT-style ("Old MIT")
+  HarfBuzz-0.0                      HarfBuzz (11.4.5)                MIT-style ("Old MIT")
                                       https://github.com/harfbuzz/harfbuzz
 
-  cairo-1.0                         cairo / cairo-gobject (1.19.0)   LGPL-2.1 or MPL-1.1
+  cairo-1.0                         cairo / cairo-gobject (1.18.x)   LGPL-2.1 or MPL-1.1
                                       https://www.cairographics.org    (dual-licensed)
 
   freetype2-2.0, xlib-2.0           Hand-maintained type stubs       (see note below)
@@ -93,6 +94,22 @@ Notes:
     of the cairo, FreeType, or Xlib builds. freetype2-2.0.gir declares a
     handful of opaque types and contains no FreeType source material;
     FreeType itself is dual-licensed FTL / GPL-2.0.
+
+  * The table gives the versions found in the linux/ files. The macos/ and
+    windows/ files were scanned from separate builds and differ for a few
+    libraries: GtkSourceView is 5.18.0 in windows/; GStreamer is 1.26.10 in
+    macos/ and windows/; librsvg is 2.62.3 in macos/ and windows/; libsecret
+    is 0.21.2 in windows/; HarfBuzz is 11.5.1 in macos/ and windows/.
+    Graphene-1.0.gir and the cairo-1.0.gir stub carry no version constant, so
+    their versions are given only to the minor release implied by the
+    manifest bound described in the next note.
+
+  * The third column of the gir_files*.txt manifests is NOT the version of
+    the described library. It is the upper bound used by the upstream
+    refresh script: transfer.py runs pkg-config --exists "<pkg> < <bound>"
+    and only replaces a file when the installed library is below that bound,
+    so the column names the NEXT minor release (gtk4 4.23.0 means "any
+    4.22.x"). Do not read those numbers as shipped versions.
 
   * The full license text for each library is available in that library's
     source repository (linked above). The upstream gir-files repository
